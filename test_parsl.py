@@ -57,12 +57,12 @@ def setup(sexec="thread", workers=1, nnodes=1, with_monitoring=False):
             hub_address=parsl.addresses.address_by_hostname(),
             hub_port=55055,
             monitoring_debug=False,
-        ),
+        )
 
     config = parsl.config.Config(
         executors = [executor],
         monitoring = monitoring,
-        strategy=None,
+        strategy = None,
     )
 
     try:
@@ -108,9 +108,10 @@ if __name__ == "__main__":
     parser.add_argument('-e', '--exec', choices=["thread", "htex", "work_queue"], default="thread", help='Time of tasks to run')
     parser.add_argument('-w', '--workers', type=int, default=1, help='Time of tasks to run')
     parser.add_argument('--nodes', type=int, default=1, help='Time of tasks to run')
-    parser.add_argument('-m', '--monitoring', action="store_true", help='Time of tasks to run')
+    parser.add_argument('-m', '--monitoring', action="store_true", default=False, help='Time of tasks to run')
     args = parser.parse_args()
 
+    print(args)
     test_name = f"{args.ttype}_n={args.ntasks}_t={args.time}_e={args.exec}_w={args.workers}_nodes={args.nodes}_m={args.monitoring}"
 
     setup(args.exec, args.workers, args.nodes, args.monitoring)
